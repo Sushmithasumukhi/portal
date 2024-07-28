@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 200px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .user-details {
+            margin-bottom: 20px;
+        }
+        .user-details div {
+            margin-bottom: 10px;
+        }
+        .attendance-form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#">BROADRIDGE</a>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="user-details">
+                <div><strong>Name:</strong> John Doe</div>
+                <div><strong>Manager:</strong> Jane Smith</div>
+                <div><strong>Department:</strong> IT</div>
+                <div><strong>Shift Timings:</strong> 9 AM - 6 PM</div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <form class="attendance-form" id="attendanceForm">
+                <div>
+                    <label for="days">Select Day:</label>
+                    <select id="days" name="days">
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="radio" id="attendance" name="attendance" value="present">
+                    <label for="attendance">Mark Attendance</label>
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('attendanceForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.querySelector('button[type="submit"]').disabled = true;
+            alert('Attendance marked successfully!');
+            // Logic to store the attendance data goes here
+        });
+    </script>
+
+</body>
+</html>
