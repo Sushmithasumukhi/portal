@@ -3,11 +3,16 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import inspect
 from config import DevelopementConfig, Config
 from flask_migrate import Migrate
+from flask_restful import Api
+from api import api_blueprint  # Import the blueprint
 import boto3
 import time
 # from s3utils import upload_to_s3, list_from_s3
 
-from models import Employee, Attendance
+from models import Employee, Attendance, db
+
+
+from api.employee import create_employee
 
 
 app = Flask(__name__)
@@ -15,7 +20,6 @@ app.config.from_object(DevelopementConfig)
 app.config.from_object(Config)
 
 #  Database initialization
-db=SQLAlchemy()
 db.init_app(app)
 
 migrate = Migrate(app, db)
@@ -32,12 +36,14 @@ def create_tables():
 # security = Security(app,datastore)
 
 #   API Initialization
-# api = Api(app)
+api = Api(app)
 
 # ------------------------
 
 app.app_context().push()
 
+
+app.register_blueprint(api_blueprint, url_prefix='/api')  # Register the blueprint
 # CORS ENABLE
 # CORS(app, supports_credentials=True)
 
@@ -74,4 +80,4 @@ def checking():
 
 
 if __name__=='__main__':
-    app.run(debug=True,port=8080,host='0.0.0.0')
+    app.run(debug=True,port=5000,host='0.0.0.0')

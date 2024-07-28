@@ -1,11 +1,7 @@
-# from flask_security import UserMixin, RoleMixin
+
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from datetime import datetime 
-
-db=SQLAlchemy()
-
-from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
@@ -18,15 +14,15 @@ class Employee(db.Model):
     department = db.Column(db.String(100), nullable=False)
     attendance_records = db.relationship('Attendance', backref='employee', lazy=True)
 
-    def __init__(self, name, vp_name, department):
-        self.name = name
+    def __init__(self, employee_name, vp_name, department):
+        self.employee_name = employee_name
         self.vp_name = vp_name
         self.department = department
 
     def to_dict(self):
         return {
             'emp_id': self.emp_id,
-            'name': self.name,
+            'name': self.employee_name,
             'vp_name': self.vp_name,
             'department': self.department
         }
